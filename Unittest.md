@@ -135,3 +135,5 @@ class MailLogin(unittest.TestCase):
 问题：
 
 在定位元素id时，id是可变的怎么解决？
+
+​		当定位是动态的id时，可以通过xpath定位来实现最终的定位。
