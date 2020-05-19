@@ -64,3 +64,71 @@ self.assertEqual(value1, value2, failedinfo) # 断言value1 == value2
 self.assertTrue(表达式, failedinfo) # 断言value为真
 
 self.assertFalse(表达式, failedinfo) # 断言value为假
+
+```python
+import unittest
+from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
+
+
+class MailLogin(unittest.TestCase):
+    def setUp(self):
+        url = 'https://mail.yeah.net/'
+        self.browser = webdriver.Chrome()
+        self.browser.get(url)
+        sleep(5)
+
+    def test_login_01(self):
+        '''
+        用户名，密码为空
+        '''
+        self.browser.switch_to.frame('x-URS-iframe')
+        self.browser.find_element_by_name('email').send_keys('')
+        self.browser.find_element_by_name('password').send_keys('')
+        self.browser.find_element_by_name('dologin').click()
+        sleep(3)
+        name = self.browser.find_element_by_id('spnUid')
+        if name == 'springcc.cheng@yeah.net':
+            print('login successful')
+        else:
+            print('login faile')
+
+    def test_login_02(self):
+        '''
+        用户名正确，密码错误
+        '''
+        self.browser.switch_to.frame('x-URS-iframe')
+        self.browser.find_element_by_name('email').send_keys('sanzang520')
+        self.browser.find_element_by_name('password').send_keys('123')
+        self.browser.find_element_by_name('dologin').click()
+        sleep(3)
+        name = self.browser.find_element_by_id('spnUid')
+        if name == 'springcc.cheng@yeah.net':
+            print('login successful')
+        else:
+            print('login faile')
+
+    def test_login_03(self):
+        """
+        用户名正确，密码错误
+        """
+        self.browser.switch_to.frame('x-URS-iframe')
+        self.browser.find_element_by_name('email').send_keys('springcc_cheng')
+        self.browser.find_element_by_name('password').send_keys('Spring0130@')
+        self.browser.find_element_by_name('dologin').click()
+        sleep(3)
+        name = self.browser.find_element_by_id('spnUid')
+        if name == 'springcc.cheng@yeah.net':
+            print('login successful')
+        else:
+            print('login faile')
+
+    def tearDown(self):
+        self.browser.quit()
+
+    if __name__ == "__main__":
+        unittest.main()
+
+```
+
