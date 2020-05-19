@@ -115,7 +115,7 @@ class MailLogin(unittest.TestCase):
         """
         self.browser.switch_to.frame('x-URS-iframe')
         self.browser.find_element_by_name('email').send_keys('springcc_cheng')
-        self.browser.find_element_by_name('password').send_keys('Spring0130@')
+        self.browser.find_element_by_name('password').send_keys('Spring112233')
         self.browser.find_element_by_name('dologin').click()
         sleep(3)
         name = self.browser.find_element_by_id('spnUid')
@@ -132,3 +132,6 @@ class MailLogin(unittest.TestCase):
 
 ```
 
+问题：
+
+在定位元素id时，id是可变的怎么解决？
